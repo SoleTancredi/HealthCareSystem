@@ -1,38 +1,31 @@
-package com.ts.medical_appointment_backend.entity;
+package com.ts.medical_appointment_backend.controller.dtos;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
-@Entity
-public class Patient {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class PatientDto {
 
-    @Column(nullable = false)  // Does not allow null values in database column
+    @NotBlank(message = "Name cannot be empty.")
+    @Size(max = 50, message = "Name cannot exceed 50 characters.")
     private String name;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Last name cannot be empty.")
+    @Size(max = 50, message = "Last name cannot exceed 50 characters.")
     private String lastName;
 
-    @Column(nullable = false)
+    @Min(value = 0, message = "Age must be a positive number.")
     private int age;
 
-    @Column(nullable = false, unique = true)
+    @NotBlank(message = "Email cannot be empty.")
+    @Email(message = "Email should be valid.")
     private String mail;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Phone cannot be empty.")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must be 10 digits.")
     private String phone;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Address cannot be empty.")
+    @Size(max = 100, message = "Address cannot exceed 100 characters.")
     private String address;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
