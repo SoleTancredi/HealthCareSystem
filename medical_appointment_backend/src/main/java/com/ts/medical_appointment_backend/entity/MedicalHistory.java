@@ -9,8 +9,9 @@ public class MedicalHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    private Long patientId;
+    @OneToOne
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
@@ -24,12 +25,12 @@ public class MedicalHistory {
         this.id = id;
     }
 
-    public Long getPatientId() {
-        return patientId;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     public String getDescription() {
