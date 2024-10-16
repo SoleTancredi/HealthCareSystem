@@ -2,6 +2,7 @@ package com.ts.medical_appointment_backend.service;
 
 import com.ts.medical_appointment_backend.controller.dtos.AppointmentDto;
 import com.ts.medical_appointment_backend.entity.Appointment;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

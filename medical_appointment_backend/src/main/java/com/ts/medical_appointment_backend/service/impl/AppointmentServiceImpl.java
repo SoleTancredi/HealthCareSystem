@@ -11,10 +11,11 @@ import com.ts.medical_appointment_backend.service.AppointmentService;
 import com.ts.medical_appointment_backend.service.mapper.AppointmentMapper;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Service
 public class AppointmentServiceImpl implements AppointmentService {
     private final DoctorRepository doctorRepository;
 
