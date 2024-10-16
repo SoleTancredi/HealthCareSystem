@@ -5,7 +5,6 @@ import com.ts.medical_appointment_backend.entity.*;
 import com.ts.medical_appointment_backend.exceptions.AppointmentNotFoundException;
 import com.ts.medical_appointment_backend.repository.AppointmentRepository;
 import com.ts.medical_appointment_backend.repository.DoctorRepository;
-import com.ts.medical_appointment_backend.repository.DoctorSpecialityRepository;
 import com.ts.medical_appointment_backend.repository.PatientRepository;
 import com.ts.medical_appointment_backend.service.AppointmentService;
 import com.ts.medical_appointment_backend.service.mapper.AppointmentMapper;
