@@ -12,6 +12,10 @@ public class Doctor {
     @Column(nullable = false)
     private String lastname;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Speciality speciality;
+
     public Long getId() {
         return id;
     }
@@ -34,5 +38,13 @@ public class Doctor {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public Speciality getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(Speciality speciality) {
+        this.speciality = speciality;
     }
 }

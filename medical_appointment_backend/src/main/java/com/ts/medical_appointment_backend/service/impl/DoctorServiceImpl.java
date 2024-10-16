@@ -31,6 +31,7 @@ public class DoctorServiceImpl implements DoctorService {
         if(doctor == null){
             doctor.setName(doctorDto.getName());
             doctor.setLastname(doctorDto.getLastname());
+            doctor.setSpeciality(doctorDto.getSpeciality());
         }
 
         return doctorRepository.save(doctor);
@@ -61,6 +62,7 @@ public class DoctorServiceImpl implements DoctorService {
         if (doctor != null) {
             doctor.setName(doctorDto.getName());
             doctor.setLastname(doctorDto.getLastname());
+            doctor.setSpeciality(doctorDto.getSpeciality());
         }
 
         Doctor updatedDoctor = doctorRepository.save(doctor);
