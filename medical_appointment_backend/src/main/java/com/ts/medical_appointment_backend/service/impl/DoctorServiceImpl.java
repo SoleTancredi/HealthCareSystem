@@ -25,14 +25,11 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor createDoctor(DoctorDto doctorDto) {
-        Doctor doctor = doctorRepository.findByNameAndLastname(doctorDto.getName(), doctorDto.getLastname())
-                .orElseThrow(() -> new EntityNotFoundException("Doctor not found"));
+        Doctor doctor = new Doctor();
 
-        if(doctor == null){
-            doctor.setName(doctorDto.getName());
-            doctor.setLastname(doctorDto.getLastname());
-            doctor.setSpeciality(doctorDto.getSpeciality());
-        }
+        doctor.setName(doctorDto.getName());
+        doctor.setLastname(doctorDto.getLastname());
+        doctor.setSpeciality(doctorDto.getSpeciality());
 
         return doctorRepository.save(doctor);
     }
@@ -46,12 +43,10 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<DoctorDto> getDoctors() {
+    public List<Doctor> getDoctors() {
         List<Doctor> doctors = doctorRepository.findAll();
 
-        return doctors.stream()
-                .map(doctorMapper::toDto)
-                .collect(Collectors.toList());
+        return doctors;
     }
 
     @Override
@@ -72,6 +67,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void deleteDoctor(Long id) {
+
         Doctor doctor = doctorRepository.findById(id)
                 .orElseThrow(() -> new DoctorNotFoundException("Doctor not found with id: " + id));
 

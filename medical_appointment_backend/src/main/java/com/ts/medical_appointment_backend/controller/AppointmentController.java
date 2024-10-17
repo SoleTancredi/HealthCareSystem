@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/appointments")
 public class AppointmentController {
     private final AppointmentService appointmentService;
 
@@ -35,8 +36,8 @@ public class AppointmentController {
 
 
     @GetMapping
-    public ResponseEntity<List<AppointmentDto>> getAppointments() {
-        List<AppointmentDto> appointments = appointmentService.getAppointments();
+    public ResponseEntity<List<Appointment>> getAppointments() {
+        List<Appointment> appointments = appointmentService.getAppointments();
         return ResponseEntity.ok(appointments);
     }
 

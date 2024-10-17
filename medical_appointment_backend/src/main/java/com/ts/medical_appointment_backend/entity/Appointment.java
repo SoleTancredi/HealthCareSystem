@@ -49,4 +49,14 @@ public class Appointment {
     public void setDateTimeAppointment(Date dateTimeAppointment) {
         this.dateTimeAppointment = dateTimeAppointment;
     }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "id=" + id +
+                ", doctor=" + (doctor != null ? doctor.getName() + " " + doctor.getLastname() : "No Doctor") +
+                ", patient=" + (patient != null ? patient.getName() + " " + patient.getLastName() : "No Patient") +
+                ", dateTimeAppointment=" + dateTimeAppointment +
+                '}';
+    }
 }

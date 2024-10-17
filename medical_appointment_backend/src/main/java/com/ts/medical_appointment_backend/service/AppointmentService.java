@@ -9,7 +9,7 @@ import java.util.List;
 public interface AppointmentService {
     Appointment createAppointment(AppointmentDto appointmentDto);
     AppointmentDto getAppointmentById(Long id);
-    List<AppointmentDto> getAppointments();
+    List<Appointment> getAppointments();
     AppointmentDto updateAppointment(Long id, AppointmentDto appointmentDto);
     void deleteAppointment(Long id);
 }

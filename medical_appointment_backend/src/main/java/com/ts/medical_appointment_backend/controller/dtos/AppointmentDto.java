@@ -1,15 +1,18 @@
 package com.ts.medical_appointment_backend.controller.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class AppointmentDto {
     @NotNull(message = "Appointment date and time cannot be null.")
     @Future(message = "Appointment date and time must be in the future.")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date dateTimeAppointment;
 
     @NotBlank(message = "Doctor's first name is required.")
@@ -67,4 +70,16 @@ public class AppointmentDto {
     public void setDateTimeAppointment(Date dateTimeAppointment) {
         this.dateTimeAppointment = dateTimeAppointment;
     }
+
+    @Override
+    public String toString() {
+        return "AppointmentDto{" +
+                "dateTimeAppointment=" + dateTimeAppointment +
+                ", nameDoctor='" + nameDoctor + '\'' +
+                ", lastnameDoctor='" + lastnameDoctor + '\'' +
+                ", namePatient='" + namePatient + '\'' +
+                ", lastnamePatient='" + lastnamePatient + '\'' +
+                '}';
+    }
 }
+

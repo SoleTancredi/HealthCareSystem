@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/doctors")
 public class DoctorController {
@@ -36,8 +37,8 @@ public class DoctorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DoctorDto>> getAllDoctors() {
-        List<DoctorDto> doctors = doctorService.getDoctors();
+    public ResponseEntity<List<Doctor>> getAllDoctors() {
+        List<Doctor> doctors = doctorService.getDoctors();
         return new ResponseEntity<>(doctors, HttpStatus.OK);
     }
 

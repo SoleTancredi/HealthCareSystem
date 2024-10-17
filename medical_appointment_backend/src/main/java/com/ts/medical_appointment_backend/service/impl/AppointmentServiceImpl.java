@@ -12,6 +12,9 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
@@ -32,18 +35,29 @@ public class AppointmentServiceImpl implements AppointmentService {
         this.appointmentMapper = appointmentMapper;
     }
 
+    public boolean isDateTimeAvailable(Long doctorId, Date dateTimeAppointment) {
+        return !appointmentRepository.existsByDoctorIdAndDateTimeAppointment(doctorId, dateTimeAppointment);
+    }
+
     @Override
     public Appointment createAppointment(@Valid AppointmentDto appointmentDto) {
+
         Doctor doctor = doctorRepository.findByNameAndLastname(appointmentDto.getNameDoctor(), appointmentDto.getLastnameDoctor())
                 .orElseThrow(() -> new EntityNotFoundException("Doctor not found"));
 
         Patient patient = patientRepository.findByNameAndLastName(appointmentDto.getNamePatient(), appointmentDto.getLastnamePatient())
                 .orElseThrow(() -> new EntityNotFoundException("Patient not found"));
 
+        if (!isDateTimeAvailable(doctor.getId(), appointmentDto.getDateTimeAppointment())) {
+            throw new IllegalArgumentException("The date and time are already taken by another appointment for this doctor.");
+        }
+
+        // Create
         Appointment appointment = new Appointment();
         appointment.setDoctor(doctor);
         appointment.setPatient(patient);
         appointment.setDateTimeAppointment(appointmentDto.getDateTimeAppointment());
+        System.out.println(appointment.toString());
 
         return appointmentRepository.save(appointment);
     }
@@ -57,13 +71,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
-    public List<AppointmentDto> getAppointments() {
+    public List<Appointment> getAppointments() {
         List<Appointment> appointments = appointmentRepository.findAll();
 
+        System.out.println("muestro lista de appointments appointments: " + appointments.toString());
         //Convert the list of Appointment entities to a list of AppointmentDto entities using the mapper
-        return appointments.stream()
-                .map(appointmentMapper::toDto)
-                .collect(Collectors.toList());
+        return appointments;
     }
 
     @Override
