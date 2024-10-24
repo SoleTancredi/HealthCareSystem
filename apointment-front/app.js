@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	doctorForm.addEventListener("submit", function (e) {
 		e.preventDefault();
 		const id = document.getElementById("doctorId").value;
+		console.log(" id en el hidden -----", id);
 		const name = document.getElementById("name").value;
 		const lastname = document.getElementById("lastname").value;
 		const speciality = specialitySelect.value;
@@ -129,9 +130,18 @@ document.addEventListener("DOMContentLoaded", function () {
 		fetch(`${API_URL}/${id}`)
 			.then((response) => response.json())
 			.then((doctor) => {
-				document.getElementById("doctorId").value = doctor.id;
+				console.log(
+					"DPCTOR PARA EDITAR!  ",
+					id,
+					JSON.stringify(doctor)
+				);
+				document.getElementById("doctorId").value = id;
 				document.getElementById("name").value = doctor.name;
 				document.getElementById("lastname").value = doctor.lastname;
+				console.log(
+					"COnsole log de speciality: ",
+					(specialitySelect.value = doctor.speciality)
+				);
 				specialitySelect.value = doctor.speciality;
 			})
 			.catch((error) => {
@@ -143,7 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	function deleteDoctor(id) {
-		console.log(`Intentando eliminar doctor con ID: ${id}`);
 		if (confirm("¿Estás seguro de que quieres eliminar este doctor?")) {
 			fetch(`${API_URL}/${id}`, {
 				method: "DELETE",

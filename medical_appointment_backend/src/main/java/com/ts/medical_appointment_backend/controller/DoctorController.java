@@ -49,9 +49,13 @@ public class DoctorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDoctor(@PathVariable Long id) {
-        doctorService.deleteDoctor(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<String> deleteDoctor(@PathVariable Long id) {
+        try {
+            doctorService.deleteDoctor(id); // Asume que este método elimina el doctor
+            return ResponseEntity.ok("{\"message\": \"Doctor deleted successfully\"}");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"message\": \"Error deleting doctor\"}");
+        }
     }
 }
 
